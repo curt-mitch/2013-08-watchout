@@ -9,13 +9,18 @@ var gameBoard = d3.select('.container').append("svg:svg")
                     .attr('width',gameOptions.width)
                     .attr('height',gameOptions.height);
 
+//genereate random coordiantes function
+var newCoordinates = function(){
+  return Math.random() *200;
+};
+
 var createEnemies = function(){
   var collection = _.range(0,gameOptions.nEnemies);
   return _.map(collection, function(i){
     return {
       id: i,
-      x: Math.random() * 200,
-      y: Math.random() * 200
+      x: newCoordinates(),
+      y: newCoordinates()
     };
   });
 };
@@ -30,7 +35,14 @@ allEnemies.enter().append('svg:circle')
             .attr('r', '10')
             .attr('fill', 'black');
 
-setTimeout(createEnemies(), 2000);
-allEnemies.transition()
-            .attr('cx', function(d){return d.x};)
-            .attr('cy', function(d){return d.y};);
+var MOVE = function (){
+  window.setInterval(moveEnemies, 1000);
+};
+
+var moveEnemies = function() {
+  allEnemies.transition().duration(500)
+            .attr('cx', function(d){d.x = newCoordinates(); return d.x})
+            .attr('cy', function(d){d.y = newCoordinates(); return d.y});
+};
+
+MOVE();
