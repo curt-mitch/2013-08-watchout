@@ -23,9 +23,14 @@ var createEnemies = function(){
 var allEnemies = gameBoard.selectAll('svg').data(createEnemies);
 
 //Enemies enter the gameBoard
-  allEnemies.enter().append('svg:circle')
-              .attr('class', 'enemy')
-              .attr('cx', function(d){return d.x})
-              .attr('cy', function(d){return d.y})
-              .attr('r', '10')
-              .attr('fill', 'black');
+allEnemies.enter().append('svg:circle')
+            .attr('class', 'enemy')
+            .attr('cx', function(d){return d.x})
+            .attr('cy', function(d){return d.y})
+            .attr('r', '10')
+            .attr('fill', 'black');
+
+setTimeout(createEnemies(), 2000);
+allEnemies.transition()
+            .attr('cx', function(d){return d.x};)
+            .attr('cy', function(d){return d.y};);
