@@ -1,7 +1,7 @@
 var gameOptions = {
   height: 450,
   width: 700,
-  nEnemies: 5,
+  nEnemies: 10,
   padding: 20
 };
 
@@ -14,18 +14,18 @@ var createEnemies = function(){
   return _.map(collection, function(i){
     return {
       id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100
+      x: Math.random() * 200,
+      y: Math.random() * 200
     };
   });
 };
 
-var allEnemies = gameBoard.selectAll('svg').data(createEnemies,);
+var allEnemies = gameBoard.selectAll('svg').data(createEnemies);
 
 //Enemies enter the gameBoard
-allEnemies.enter().append('svg:circle')
-            .attr('class', 'enemy')
-            .attr('cx', '20')
-            .attr('cy', '20')
-            .attr('r', '20')
-            .attr('fill', 'blue');
+  allEnemies.enter().append('svg:circle')
+              .attr('class', 'enemy')
+              .attr('cx', function(d){return d.x})
+              .attr('cy', function(d){return d.y})
+              .attr('r', '10')
+              .attr('fill', 'black');
